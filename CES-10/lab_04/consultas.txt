@@ -1,0 +1,142 @@
+**************************************
+Consulta Simples,opcao 2, RG: 12
+1234567890
+1234567980
+**************************************
+**************************************
+Consulta Simples,opcao 1, Nome: Br
+Bruno Queiroz
+Bruno Lima
+**************************************
+**************************************
+Consulta Simples,opcao 2, RG: 12
+1234567890
+1234567980
+**************************************
+**************************************
+Consulta Simples,opcao 3, Função: A
+**************************************
+**************************************
+Consulta Simples,opcao 3, Função: Analista
+**************************************
+**************************************
+Consulta Simples,opcao 3, Função: A
+Analista
+**************************************
+***********************************************
+Consulta Avançada,Opção 3
+      |Analista|      
+Bruno Queiroz
+      |Gerente|        
+Bruno Lima
+     |Arquiteto|      
+     |Programador|    
+     |Testador|      
+     |Suporte|        
+***********************************************
+***********************************************
+Consulta Avançada,Opção 2
+O total de gastos mensal com
+os funcionários é:151500.000000
+***********************************************
+***********************************************
+Consulta Avançada,Opção 3
+      |Analista|      
+Bruno Queiroz
+      |Gerente|        
+Bruno Lima
+     |Arquiteto|      
+     |Programador|    
+     |Testador|      
+     |Suporte|        
+***********************************************
+*************************************************
+Consulta Avançada,Opção 4
+Endereço:1
+ a.Rua:1
+ b.Número:1
+ c.Cidade:1
+ d.CEP:
+
+Não há funcionário com o endereço fornecido
+***********************************************
+***********************************************
+Consulta Avançada,opção 1
+Bruno Lima
+Bruno Queiroz
+Breno Lavgine
+
+***********************************************
+***********************************************
+Consulta Avançada,Opção 3
+      |Analista|      
+Bruno Queiroz
+      |Gerente|        
+Bruno Lima
+     |Arquiteto|      
+Rechiko Hus
+     |Programador|    
+     |Testador|      
+     |Suporte|        
+***********************************************
+***********************************************
+Consulta Avançada,Opção 3
+      |Analista|      
+Bruno Queiroz
+      |Gerente|        
+Bruno Lima
+     |Arquiteto|      
+Rechiko Hus
+     |Programador|    
+     |Testador|      
+     |Suporte|        
+***********************************************
+***********************************************
+Consulta Avançada,Opção 3
+      |Analista|      
+Bruno Queiroz
+      |Gerente|        
+Bruno Lima
+     |Arquiteto|      
+Rechiko Hus
+     |Programador|    
+     |Testador|      
+     |Suporte|        
+***********************************************
+***********************************************
+Consulta Avançada,Opção 3
+      |Analista|      
+      |Gerente|        
+Hiskuh hukl
+     |Arquiteto|      
+Bruno Lima
+     |Programador|    
+     |Testador|      
+     |Suporte|        
+***********************************************
+***********************************************
+Consulta Simples,opção 1, Nome: Bruno
+Bruno Lima
+***********************************************
+***********************************************
+Consulta Avançada,Opção 3
+      |Analista|      
+      |Gerente|        
+Hiskuh hukl
+     |Arquiteto|      
+Bruno Lima
+     |Programador|    
+     |Testador|      
+     |Suporte|        
+***********************************************
+***********************************************
+Consulta Avançada,Opção 3
+      |Analista|      
+      |Gerente|        
+Hiskuh hukl
+     |Arquiteto|      
+Bruno Lima
+     |Programador|    
+     |Testador|      
+     |Suporte|        
+***********************************************

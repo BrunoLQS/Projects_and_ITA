@@ -1,0 +1,27 @@
+Exemplo de arquivo de saida
+PERT/CPM
+Pode escrever qualquer coisa no cabecalho.
+Coloque exatamente 5 linhas antes do traco.
+
+------------------------------------------------------------
+
+UMA ORDENACAO TOPOLOGICA:
+
+A B C I E F J L K N D G H M
+
+------------------------------------------------------------
+
+CAMINHO CRITICO:
+
+TAREFA        DESCRICAO           DURACAO
+
+  A   Escavacao                       2
+  B   Fundacao                        4
+  C   Paredes                        10
+  E   Encanamento exterior            4
+  F   Encanamento interior            5
+  J   Divisorias                      8
+  L   Pintura interior                5
+  N   Acabamento interior             6
+                                   ----
+TEMPO MINIMO PARA O PROJETO:         44 semanas

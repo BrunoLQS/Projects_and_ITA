@@ -1,0 +1,11 @@
+Simulador de aeroporto
+Para torre de controle
+AUTORIZACOES DE POUSO
+=========================================
+FLIGHT  FROM
+
+1234    Amsterdam
+0000    Nenhum aviao pousando
+8086    San Francisco
+0055    Paris
+4444    Londres

@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1530408766 source:c:\users\bruno lima\desktop\meus programas\lab_aula\projetolabaula\codigofonte.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+

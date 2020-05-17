@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1524879282 source:c:\a meus programas\lab 02\lab02brunolimaqueirozsantos.cpp
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+

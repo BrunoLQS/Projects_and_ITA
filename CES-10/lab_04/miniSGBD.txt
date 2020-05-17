@@ -1,0 +1,24 @@
+*************************************************
+1.Nome Completo: Bruno Lima
+2.RG: 1234567819
+3.Função: Arquiteto
+4.Salário: 1500.000000
+5.Data de Nascimento: 220698
+6.Endereço: 
+a.rua: H8,Pc.Mar.Ed.G.
+b.Número: 50
+c.Cidade: Sao Jose dos Campos
+d.CEP: 12228-900
+*************************************************
+*************************************************
+1.Nome Completo: Hiskuh hukl
+2.RG: 1234569872
+3.Função: Gerente
+4.Salário: 1500.000000
+5.Data de Nascimento: 220703
+6.Endereço: 
+a.rua: H8,Pc.Mar.Ed.G.
+b.Número: 50
+c.Cidade: Sao Jose dos Campos
+d.CEP: 12228-900
+*************************************************

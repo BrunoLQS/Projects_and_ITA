@@ -1,0 +1,73 @@
+COPA DO MUNDO DE 2018
+
+GRUPO A: 
+
+Selecao             |  Pontos|Vitorias| GolsPro| GolsCon|SaldGols
+--------------------|--------|--------|--------|--------|--------
+Russia              |       6|       2|       3|       2|       1
+Arabia Saudita      |       5|       1|       2|       1|       1
+Egito               |       4|       1|       1|       1|       0
+Uruguai             |       1|       0|       0|       2|      -2
+
+GRUPO B: 
+
+Selecao             |  Pontos|Vitorias| GolsPro| GolsCon|SaldGols
+--------------------|--------|--------|--------|--------|--------
+Espanha             |       7|       2|       7|       5|       2
+Ira                 |       6|       2|       6|       4|       2
+Marrocos            |       3|       1|       4|       6|      -2
+Portugal            |       1|       0|       3|       5|      -2
+
+GRUPO C: 
+
+Selecao             |  Pontos|Vitorias| GolsPro| GolsCon|SaldGols
+--------------------|--------|--------|--------|--------|--------
+Franca              |       7|       2|       2|       0|       2
+Australia           |       4|       1|       1|       1|       0
+Dinamarca           |       3|       0|       0|       0|       0
+Peru                |       1|       0|       0|       2|      -2
+
+GRUPO D: 
+
+Selecao             |  Pontos|Vitorias| GolsPro| GolsCon|SaldGols
+--------------------|--------|--------|--------|--------|--------
+Argentina           |       7|       2|       3|       1|       2
+Islandia            |       6|       2|       2|       1|       1
+Croacia             |       3|       1|       1|       2|      -1
+Nigeria             |       1|       0|       1|       3|      -2
+
+GRUPO E: 
+
+Selecao             |  Pontos|Vitorias| GolsPro| GolsCon|SaldGols
+--------------------|--------|--------|--------|--------|--------
+Costa Rica          |       7|       2|       4|       1|       3
+Suica               |       4|       1|       2|       3|      -1
+Brasil              |       3|       1|       5|       4|       1
+Servia              |       2|       0|       0|       3|      -3
+
+GRUPO F: 
+
+Selecao             |  Pontos|Vitorias| GolsPro| GolsCon|SaldGols
+--------------------|--------|--------|--------|--------|--------
+Coreia do Sul       |       9|       3|       6|       3|       3
+Alemanha            |       6|       2|       3|       2|       1
+Mexico              |       3|       1|       2|       3|      -1
+Suecia              |       0|       0|       1|       4|      -3
+
+GRUPO G: 
+
+Selecao             |  Pontos|Vitorias| GolsPro| GolsCon|SaldGols
+--------------------|--------|--------|--------|--------|--------
+Tunisia             |       7|       2|       4|       1|       3
+Panama              |       4|       1|       2|       3|      -1
+Belgica             |       3|       1|       3|       4|      -1
+Inglaterra          |       2|       0|       0|       1|      -1
+
+GRUPO H: 
+
+Selecao             |  Pontos|Vitorias| GolsPro| GolsCon|SaldGols
+--------------------|--------|--------|--------|--------|--------
+Polonia             |       9|       3|       3|       0|       3
+Senegal             |       6|       2|       2|       1|       1
+Colombia            |       3|       1|       1|       2|      -1
+Japa                |       0|       0|       0|       3|      -3

@@ -1,0 +1,22 @@
+Exemplo de arquivo de entrada
+Fonte: Fernando Nogueira - UFRRJ
+bla bla
+------------------------------------------------------------
+TAREFA        DESCRICAO            DURACAO  TAREFAS 
+                                   SEMANAS  PRECEDENTES
+------------------------------------------------------------
+  A   E                      	      2     .
+  B   F                               4     A
+  C   P                              10     B
+  D   T                               6     C
+  E   E                               4     C
+  F   E                               5     E
+  G   M                               7     D
+  H   P                               9     E,G
+  I   I                               7     C
+  J   D                               8     F,I
+  K   P                               4     J
+  L   p           		      5     J
+  M   A           		      2     H
+  N   a           		      6     K,L
+------------------------------------------------------------

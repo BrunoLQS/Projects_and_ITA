@@ -1,0 +1,65 @@
+typedef struct Fila{ /* fila de vertices */
+    int ini;
+    int fim;
+    vertice Queue[ 1 + MAXIMOV ];
+    int quant;
+}Fila;
+typedef Fila*fila;
+vertice Visitados[ 1 + MAXIMOV];
+int OrdemDeBusca[ 1 + MAXIMOV ];
+/* ------------------------ TAD FILA ---------------------------------*/
+fila InicializacaoFila(){
+    fila F = ( fila )malloc( sizeof( *F  )  );
+    F->ini=0;
+    F->fim=0;
+    F->quant=0;
+    return F;
+}
+boolean FilaVazia(fila F){
+    if(F->quant==0)
+        return TRUE;
+    else return FALSE;
+}
+void InserirFila( fila F , vertice v ){
+    if(  FilaVazia( F )  )
+        if(F->ini==0) /* poderia estah na inicializacao tambem */
+            ++F->ini;
+    F->Queue[ ++F->fim ] = v;
+    F->quant++;
+}
+int RemoverFila( fila F ){
+    if( !FilaVazia ( F ) ){ /* nao vai estar no neste lab */
+        --F->quant;
+        return (  F->Queue[ F->ini++ ]  ) ;
+    }
+    return FALSE;
+}
+void FinalizarFila( fila F ){
+    free( F );
+}
+/*=============== Fim do TAD para fila ============*/
+void BuscaEmLargura( Grafo Input , vertice v , Grafo Output ){
+    fila F = InicializacaoFila();
+    InserirFila(F, v);
+    int contador=0;
+    for( int i =0; i<= MAXIMOV ; i++ )
+        OrdemDeBusca[ i ] = -1;
+    OrdemDeBusca[ v ] = ++contador;
+    int looping = 1;
+    while( !FilaVazia( F ) ){
+        v=RemoverFila(F);
+        /*
+            cada novo vértice da busca é inédito ao caminho
+        */
+        //visita
+        Visitados[ looping ] =v;
+        for( link a = Input->adj[ v ];  a!=NULL ; a = a->prox ){
+            if( OrdemDeBusca[ a->v ] == -1 ){
+                OrdemDeBusca[ a->v ] = ++contador;
+                InserirFila(F, a->v );
+            }
+        }
+        looping++;
+    }
+    FinalizarFila( F );
+}

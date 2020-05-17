@@ -1,0 +1,23 @@
+Arquivo saida
+Resposta do Algoritmo de Prim
+bla bla
+
+---------------------------------------
+Ordem de selecao pelo algoritmo
+---------------------------------------
+ITA        H8           1
+INPE       ITA          4
+DS         INPE         2
+COCTA      ITA          5
+COCTA      IFI          3
+
+Custo total: 15
+
+---------------------------------------
+Ordem crescente de custos
+---------------------------------------
+ITA        H8           1
+DS         INPE         2
+COCTA      IFI          3
+INPE       ITA          4
+COCTA      ITA          5

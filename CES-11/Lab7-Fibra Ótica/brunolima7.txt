@@ -1,0 +1,25 @@
+Arquivo saida
+Resposta do Algoritmo de Prim
+bla bla
+
+---------------------------------------
+Ordem de selecao pelo algoritmo
+---------------------------------------
+A          G            1
+A          C            1
+C          D            2
+D          B            1
+D          E            2
+E          F            1
+
+Custo total: 8
+
+---------------------------------------
+Ordem crescente de custos
+---------------------------------------
+A          G            1
+A          C            1
+D          B            1
+E          F            1
+C          D            2
+D          E            2

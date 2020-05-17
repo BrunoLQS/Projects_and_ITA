@@ -1,0 +1,27 @@
+Exemplo de arquivo de saida
+PERT/CPM
+Pode escrever qualquer coisa no cabecalho.
+Coloque exatamente 5 linhas antes do traco.
+
+------------------------------------------------------------
+
+UMA ORDENACAO TOPOLOGICA:
+
+A B C I E F J L K N D G H M 
+
+------------------------------------------------------------
+
+CAMINHO CRITICO:
+
+TAREFA        DESCRICAO           DURACAO
+
+  A   E                               2
+  B   F                               4
+  C   P                              10
+  E   E                               4
+  F   E                               5
+  J   D                               8
+  L   p                               5
+  N   a                               6
+                                   ----
+TEMPO MINIMO PARA O PROJETO:         44 semanas

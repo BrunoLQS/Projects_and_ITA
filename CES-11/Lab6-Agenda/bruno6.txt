@@ -1,0 +1,25 @@
+Agenda Eletronica - Formato de arquivo de saida.
+Aluno Bruno Lima Queiroz Santos T3
+INSTITUTO TECNOLOGICO DE AERONAUTICA
+DATA 12-11-2018 
+Curso de CES-11   PROFESSOR ARMANDO
+--------------------------------------------------
+RESPOSTAS DAS CONSULTAS
+--------------------------------------------------
+60       Fazer lab de ces-11
+75       Responder e-mails
+80       Ler noticias
+99       Telefonar para o ente querido
+85       Treino correr 10 km
+51       Ir ao banco pagar conta
+
+--------------------------------------------------
+FICA PARA O DIA SEGUINTE
+--------------------------------------------------
+98       Comprar guarda-chuva
+50       Relatorio de quimica
+40       Estudar matematica
+33       Ensaio de guitarra
+12       Escovar os dentes
+ 8       Pentear o cabelo
+ 5       Limpar apartamento

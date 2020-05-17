@@ -1,0 +1,27 @@
+Exemplo de arquivo de entrada - Lab Livro.
+bla bla bla
+ble
+-------------------------------------------------------
+TITULO     esporte
+INSERIR    atletismo    SUB          esporte
+INSERIR    natacao      SUB          esporte
+INSERIR    coletivo     SUB          esporte
+INSERIR    basquete     SUB          coletivo
+INSERIR    futebol      SUB          coletivo
+INSERIR    volei        SEGUINTE_A   futebol
+INSERIR    luta         SEGUINTE_A   natacao 
+INSERIR    argola       SUB          ginastica
+INSERIR    jiu-jitsu    SUB          luta
+INSERIR    karate       SEGUINTE_A   jiu-jitsu
+LISTA
+INSERIR    maratona       SUB          atletismo
+INSERIR    100_m_rasos    SEGUINTE_A   maratona
+INSERIR    salto_triplo   SEGUINTE_A   100_m_rasos
+REMOVER    volei
+REMOVER    luta
+REMOVER    badminton
+LISTA
+INSERIR    individual   SEGUINTE_A   coletivo
+TRANSFERIR atletismo    SUB          individual
+LISTA
+FIM

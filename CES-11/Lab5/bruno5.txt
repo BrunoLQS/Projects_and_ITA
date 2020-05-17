@@ -1,0 +1,46 @@
+INSTITUTO TECNOLOGICO DE AERONAUTICA - ITA - CES 11
+Aluno: Bruno Lima Queiroz Santos - TURMA 22.3
+LAB 5 - LIVRO
+--------------------------------------------------
+ERRO: nao encontrado item ginastica
+--------------------------------------------------
+LISTA 1
+
+      esporte
+1.      coletivo
+1.1.      futebol
+1.2.      volei
+1.3.      basquete
+2.      natacao
+3.      luta
+3.1.      jiu-jitsu
+3.2.      karate
+4.      atletismo
+--------------------------------------------------
+ERRO: nao encontrado item badminton
+--------------------------------------------------
+LISTA 2
+
+      esporte
+1.      coletivo
+1.1.      futebol
+1.2.      basquete
+2.      natacao
+3.      atletismo
+3.1.      maratona
+3.2.      100_m_rasos
+3.3.      salto_triplo
+--------------------------------------------------
+LISTA 3
+
+      esporte
+1.      coletivo
+1.1.      futebol
+1.2.      basquete
+2.      individual
+2.1.      atletismo
+2.1.1.      maratona
+2.1.2.      100_m_rasos
+2.1.3.      salto_triplo
+3.      natacao
+--------------------------------------------------

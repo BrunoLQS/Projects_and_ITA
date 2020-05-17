@@ -1,0 +1,29 @@
+Software para agenda eletronica
+Exemplo de arquivo de entrada
+Bla bla
+--------------------------------------------------
+Numero maximo de elementos no heap:
+30
+--------------------------------------------------
+TAREFA   IMPORTANCIA   DESCRICAO
+--------------------------------------------------
+NOVA          40       Estudar matematica
+NOVA          60       Fazer lab de ces-11
+NOVA          50       Relatorio de quimica
+PROXIMA     
+NOVA           8       Pentear o cabelo
+NOVA          75       Responder e-mails
+NOVA          51       Ir ao banco pagar conta
+PROXIMA
+NOVA           5       Limpar apartamento
+NOVA          80       Ler noticias
+PROXIMA       
+NOVA          12       Escovar os dentes
+NOVA          99       Telefonar para o ente querido
+NOVA          33       Ensaio de guitarra
+NOVA          85       Treino correr 10 km
+PROXIMA
+PROXIMA
+PROXIMA
+NOVA          98       Comprar guarda-chuva
+FIM

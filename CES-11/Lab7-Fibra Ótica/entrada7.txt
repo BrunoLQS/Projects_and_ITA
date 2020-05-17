@@ -1,0 +1,19 @@
+Estudo de custos para conexao fibra otica
+CTA - Clube de Treinamento de Atletismo
+
+---------------------------------------
+     PREDIOS         CUSTO
+---------------------------------------
+A          B            6
+A    	   C  		1
+A 	   D            2
+C          B            3
+D          B            1
+C          D            2 
+E          F            1
+E          A            7
+C          F            3
+D          F            4
+D          E            2
+G          B            3
+A          G            1
