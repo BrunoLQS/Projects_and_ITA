@@ -1,0 +1,115 @@
+---
+title: "DESAFIO_BrunoLima_T3_S14"
+author: "Bruno Lima Queiroz Santos"
+date: "26/11/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+db<- read.table("PESQUISA___VOOS_VERSUS_RENDA.txt",
+                header = FALSE,
+                sep = "", quote = "\"'",
+                dec = ".",
+                fill=T)
+X<-db[1:101,]
+
+```
+
+#### Nomenclatura
+
+```{r}
+#Renda em R$
+Renda<-c("Menos de 5.000",
+         "5.000 - 10.000",
+         "10.000 – 20.000",
+         "Acima de 20.000")
+Renda<-matrix(Renda,byrow=T)
+colnames(Renda)<-c("Renda")
+rownames(Renda)<-rownames(Renda,do.NULL=FALSE,prefix="")
+
+
+#Frequência dos Voos
+Voos<-c("Nunca",
+        "Raramente",
+        "Frequentemente")
+Voos<-matrix(Voos,byrow=T)
+colnames(Voos)<-c("Voos")
+rownames(Voos)<-rownames(Voos,do.NULL=FALSE,prefix="")
+
+
+```
+
+### 1- Construção da tabela de frequências
+
+```{r }
+Z<-as.matrix(X[2:101,])
+
+##rownames(Z)<-NULL
+##colnames(Z)<-NULL
+
+#m <- mapply(Z, FUN=as.numeric)
+#m <- matrix(data=m,ncol=3)
+#m
+
+
+Z<-as.numeric(as.character(Z)) #aplicação por coluna --> gera sequencia conforme sequencia de colunas.
+Z<-matrix(Z,byrow=F,ncol=3) #portanto byrow=FALSE
+
+
+library(plyr)
+colnames(Z)<-c("Respondente","Renda","Voos")
+count(Z[,c("Renda","Voos")])
+
+table(Z[,"Renda"])
+#Renda
+
+A<-as.data.frame(Z)
+K<-table(A$Renda,A$Voos)
+#K
+colnames(K)<-Voos
+rownames(K)<-Renda
+
+Y<-as.matrix(K)
+#Y[,"Nunca"]
+Y
+B<-as.numeric(Y)
+B
+
+```
+
+### 2- Determinação da estatística χ² 
+
+```{r}
+P<-c(0.20,0.05,0.05,0.05,0.15,0.05,0.05,0.05,0.05,0.05,0.10,0.15)
+chisq.test(x=B,p=c(0.20,0.05,0.05,0.05,0.15,0.05,0.05,0.05,0.05,0.05,0.10,0.15))
+
+
+```
+Conforme o p-valor do teste, obteve-se uma boa estimativa para o perfil Qui-quadrado das categorias.
+
+```{r}
+P<-matrix(P,ncol=3)
+colnames(P)<-Voos
+rownames(P)<-Renda
+
+cat(paste("Probabilidade Esperada"))
+P
+```
+
+### 3- Representar estatística por mosaicplot
+
+```{r}
+K<-K/sum(B)
+
+mosaicplot(P,col="blue",main="ESTATÍSTICA ESPERADA",xlab="",ylab="")
+mosaicplot(K,col="yellow",main="ESTATÍSTICA OBTIDA",xlab="",ylab="")
+```
+
+### 4- Interpretação dos resultados obtidos
+
+Obtém-se evidências de que há um relacionamento entre a frequência de voos e a renda de forma que há uma tendência a quem possui maior renda viajar mais frequentemente e quem possui menor, viajar menos frequentemente. Isso denota que existe relação entre as categorias frequência e renda.

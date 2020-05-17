@@ -1,0 +1,274 @@
+---
+title: "BrunoLima_T3_QUIZ_S11.Rmd"
+author: "Bruno Lima Queiroz Santos"
+date: "DUE 22/11/2019"
+output: html_document
+---
+  
+  ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+O estimador pontual para $p$, também denominado proporção amostral de sucessos, é definido como $p$^ $= X/n$, onde: </br></br>
+$X$ denota o número de elementos que apresentam a característica.</br></br></br>
+
+Considerando $X$ o número de eleitores que votarão em um determinado candidato, a variável $X$ tem distribuição binomial $X \approx Bin(n,p)$, onde $n$ denota o número de um mesmo evento binomial experimentado e $p$ a probabilidade de cada evento experimentado ser sucesso. </br>
+
+Uma observação importante é que ao analisar uma sequência de $n$ experimentos, não se obtém necessariamente $n*p$ sucessos. Mas, quanto mais se realiza essa sequência de eventos, mais os resultados obtidos se tornam distribuídos,isto é, acumulam a aleatoriedade e se aproximam de serem resultados contínuos, isto é, a densidade dos valores se aproxima da distribuição prevista. Assim, 1000 replicações é suficiente para se aproximar suficientemente a distribuição discreta de uma contínua. </br>
+
+Assim, aumentando-se o número de replicações, geram-se resultados distribuídos de forma cada vez mais contínua em vez de descontínua.Logo,**1000 replicações é suficiente para se aproximar suficientemente a distribuição discreta de uma contínua**. </br>
+
+O valor de $n$, isto é, do tamanho da sequência de experimentação está ligado à aproximação da distribuição normal. Ele é o limite superior da distribuição gerada, pois você só obtém no máximo $n$ sucessos. Alterações em n provocam mudanças no pico da distribuição suficientemente contínua pelo $k$, assim na variância, e no alongamento dela, em direção à uma distribuição normal.</br>
+```{r}
+p<-0.5 #probability of success in each independent event.
+n<-10000000 # n trials for each sample. But the result is actually the number of success in the end of n trials.
+k<-1000 # 1000 Replicações (1000 resultados/pontos) é suficiente. 
+m<-p*(1-p)
+```
+Gera-se um vetor com quantis de $0$ a $1$. Quantil $C$ é o valor focado para a variável assumir. Ou seja, $X=C$.
+
+```{r}
+x <- seq(0,n,by = 1)
+#X é um vetor com os quantis de 0 a n por 1.
+
+X<-rbinom(k,#replicações
+          n,#número de tentativas, limite superior de sucessos
+          p)#probabilidade de cada sucesso
+#Y<-dnorm(x,p*k,k*m)
+#Z<-rnorm(x,p*k,k*m)
+```
+</br></br></br>
+A função densidade de probabilidade da distribuição normal é denotada por:
+
+$$f(x)=\frac{1}{
+\sigma \sqrt{2\pi}
+}
+e^{-\frac{1}{
+2
+}(\frac{x-\mu}{\sigma})^{2}
+}$$
+
+</br>
+
+Neste caso, diz-se, como na literatura, que: </br></br>
+
+$$X \sim N(\mu, \sigma^{2})$$ </br>
+Porém, é preciso cautela, pois `dnorm` refere-se a:</br></br>
+$$X \sim N(\mu, \sigma)$$ 
+</br>
+```{r}
+hist(X,
+     prob=TRUE
+     )
+
+
+
+curve(dnorm(Vector_Of_Quantiles<-x,#quantís, média[esperança]
+            Mean<-p*n,
+            Standard_Deviation<-sqrt(n*m)#Take care, STD ISN'T Variance.STD[DESVIO PADRÃO,raiz quadrada da variança]
+            ),
+            add=T,#Comando de adicionamento à exibição/representação acima.
+            col="blue")
+### dnorm( quantís, média[esperança], STD[DESVIO PADRÃO,raiz quadrada da variança])
+#plot(dbinom(x,n,p))
+#curve(dnorm(x,p*n,sqrt(n*m)),add=T,col="blue")
+```
+
+**OBS,É ERRADO ACHAR QUE:**
+$$n \rightarrow \infty \Rightarrow q^{n-k} \rightarrow q^{n}$$, porque, $$\lim\limits_{n\to \infty}\frac{q^{n-k}}{q^{n}}=q^{-k} \neq 1$$
+$$n \rightarrow \infty \Rightarrow \frac{n!}{(n-k)!} \rightarrow n(n-1)...(n-k+1) \rightarrow n^{k}$$, pois há de $0$ ao termo $k-1$.
+
+$$\Rightarrow\frac{n!}{(n-k)!k!}p^{n}q^{n-k}\rightarrow\frac{n^{k}}{k!}(pq)^{n}q^{-k}$$
+
+Para grandes valores de $n$, sua variação se aproxima de variações contínuas, porque  **uma variação decimal é uma variação relativa muito pequena**, logo $n \rightarrow x$.</br></br>
+
+$$\Rightarrow\frac{n!}{(n-k)!k!}p^{n}q^{n-k}\rightarrow\frac{(x/q)^{k}}{k!}(pq)^{x}$$
+
+Assim,$f(X=k)=\frac{(x/q)^{k}}{k!}(pq)^{x}$ representa a probabilidade de obter-se k sucessos em uma sucessão de n experimentos, $n \to \infty$, ou seja $n$ **muito grande** com $n p_n \to \lambda \;\;\;,\;\; n \to \infty$ !
+
+```{r}
+n<-10000000
+x<-seq(0,n,by=1)
+p=0.3
+# getting numbers for a sample
+Z<-rnorm(sample_quantiles<-x,
+         mean=p,
+         sd=sqrt(p*(1-p)/n)
+         )
+A<-Z
+A<-A-p
+b<-(p*(1.0-p)/n)
+#b<-sqrt(b)
+A<-A/b
+
+hist(A,
+     prob=T,
+     main="TESTE DO ITEM D")
+curve(dnorm(x,
+            mean=0,
+            sd=1
+            ),
+      col="red",
+      add=T)
+
+
+
+A<-Z
+A<-A-p
+b<-(p*(1.0-p)/n)
+b<-sqrt(b)
+A<-A/b
+
+
+hist(A,
+     prob=T,
+     main="TESTE DO ITEM C")
+curve(dnorm(x,
+            mean=0,
+            sd=1
+            ),
+      col="red",
+      add=T)
+
+
+
+```
+
+De onde se oberva que a *padronização* de uma variável</br> </br>  $$X \sim N(\mu,\sigma^{2})$$</br> </br>  para
+
+$$Z=\frac{X-\mu}{\sigma} \Rightarrow Z \sim N(0,1)$$
+
+</br> 
+
+## 2ª Questão
+
+</br>
+```{r}
+
+F = function(x){
+  return (x*(1.0-x))
+}
+curve(F,
+      from=0,
+      to=1.0,
+      xlab="x",
+      ylab="y")
+
+```
+
+```{r}
+
+
+plot(F,
+      from=0,
+      to=1.0,
+      xlab="x",
+      ylab="y",
+     type="l",
+     lwd=4)
+abline(v=0.5,
+       col="red",
+      lty=2,
+      lwd=3)
+abline(h=0.25,
+       col="blue",
+      lty=2,
+      lwd=3)
+points(x<-0.5,y<-0.25,col="green",
+       pch=19,
+       lwd=4)
+```
+
+</br> 
+
+## 3ª Questão
+
+</br>
+
+```{r}
+#(1-α)<-0.95
+##α/2<-0.05/2=0.025
+###β<-0.025
+x<-seq(from=-4,to=4,length=1000)
+Z<-dnorm(x)# Default: mean=0, sd=1 (Standard_Deviation) != Variance.
+plot(x,Z,
+     #axes=F, #RETIRA OS EIXOS.
+     type="l",
+     xlab="Z",
+     ylab="Density Function",
+     main=expression(italic(P(Z<=Q)))
+     )
+β<-0.025
+
+xl<-x[x<=qnorm(β)];yl<-dnorm(xl)
+x2<-c(-4,xl,xl[length(xl)],-4);y2<-c(0,yl,0,0)
+polygon(x2,y2,col='grey90')
+
+```
+</br>
+O comando a `qnorm(p)` fornece o quantil $Q$, isto é, o valor $Z=Q$, tal que $P[Z\leq Q]= P_{Q}$ . **O quantil está relacionado à probabilidade acumulada **
+```{r}
+#(1-α)<-0.95
+##α/2<-0.05/2=0.025
+###β<-0.025
+
+β<-0.025
+z<-qnorm(β)
+z<-abs(z)
+E<-0.02
+n<-0.25*((z/E)**2)
+print(n)
+```
+
+## 4ª questão
+```{r}
+#(1-α)<-0.95
+##α/2<-0.05/2=0.025
+###β<-0.025
+
+β<-0.025
+z<-qnorm(β)
+z<-abs(z)
+E<-0.03
+n<-0.25*((z/E)**2)
+print(n)
+```
+
+## 5ª Questão
+
+```{r}
+
+β<-0.025
+z<-qnorm(β)
+z<-abs(z)
+
+p<-0.54
+n<-3010
+
+#OPERATIONS
+E<-p*(1-p)/n
+E<-sqrt(E)
+E<-E*z
+
+V<-c(p-E,p+E)
+
+print(V)
+
+```
+
+## 6ª questão
+### Item c
+
+```{r}
+#(1-α)<-0.95
+##α/2<-0.05/2=0.025
+###β<-0.025
+p<-0.5
+β<-0.025
+z<-qnorm(β)
+z<-abs(z)
+E<-0.02
+n<-p*(1.0-p)*((z/E)**2)
+print(n)
+
+```

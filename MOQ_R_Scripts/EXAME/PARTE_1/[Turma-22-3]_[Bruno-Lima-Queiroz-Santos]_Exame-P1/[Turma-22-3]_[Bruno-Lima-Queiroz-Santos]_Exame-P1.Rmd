@@ -1,0 +1,385 @@
+---
+Encoding: UTF-8 Unicode
+title: 'Exame de MOQ-13: PARTE 1'
+subtitle: "Problema 01 (5,0 pts)"
+author: 
+  - name: "Aluno: Bruno Lima Queiroz Santos"
+  - name: "Turma T22.3"
+  - name: "Professora: Denise B. Ferrari"
+date: 'Data: 22/11/2019'
+output:
+  html_document:
+    theme: sandstone
+    df_print: paged
+    number_sections: FALSE  
+---
+```{r include = FALSE}
+knitr::opts_chunk$set(eval = TRUE, echo = TRUE)
+```
+
+
+
+## Instruções:
+
+----
+
+1. As respostas serão avaliadas com relação à:  
+  (i) reprodutibilidade;  
+  (ii) correção; e  
+  (iii) completude da solução proposta, devendo incluir:
+
+    + Enunciado do problema  
+    + Apresentação da estratégia de solução  
+    + Resultados (resumos numéricos e gráficos)  
+    + Análise dos resultados obtidos  
+    + Código R comentado  
+    + Referências (textos, sites etc.)
+
+**OBS:**  
+Existe um volume enorme de código disponível na internet para resolver praticamente qualquer problema. O reuso de código obtido online é permitido, desde que citada a fonte (mesmo que tenha sido utilizada apenas como inspiração...)
+
+**Prazo: 06/12/2019**
+
+**Entregáveis:**
+
++ Todos os arquivos utilizados para realizar a tarefa, organizados em uma pasta, seguindo o modelo:  
+```
+[Turma-22-X]_[Nome-Aluno]_Exame-P1
+  |-data
+  |-img
+  |-[Turma-22-X]_[Nome-Aluno]_Exame-P1.html
+  |-[Turma-22-X]_[Nome-Aluno]_Exame-P1.Rmd
+```  
++ Submeter todo o material em uma pasta via **CLASSROOM**.
+
+
+## Introdução
+
+----
+
+Em um pronto-atendimento oftalmológico há 2 consultórios médicos. A clínica abre às 9h e os pacientes chegam de acordo com um processo de Poisson com taxa 10min, ou seja, este é o tempo esperado de chegada do primeiro cliente após a abertura da clínica. Os pacientes podem ser atendidos indiscriminadamente por qualquer um dos plantonistas. Ao chegar na clínica, o paciente aguarda até que um dos médicos esteja disponível. A duração de cada consulta é uma variável aleatória uniformemente distribuída entre 5 e 20 minutos. A clínica deixa de admitir novos pacientes às 16h e fecha após terminado o atendimento do último paciente.
+
+## PARTE 1:  Estratégia de Solução Computacional
+
+----
+
+> Apresente a estratégia adotada para solução computacional.
+
+A estratégia geral consiste em gerar uma contagem para a variável $N(t)$, que denota o número de clientes que chegam ao pronto-atendimento num intervalo de tempo de comprimento $\Delta t= t$ seguindo o processo de Poisson, para cada um dos $\frac{(16-9)horas}{t }\cdot\frac{k \;[\; dimensão\; da \; variável  \;\; t\;]}{1 \;\;hora}$ intervalos, onde $k$ é o fator de conversão entre as dimensões de tempo. Seguir-se-á a divisão em intervalos de $t=5$ minutos para obter-se uma boa e leve aproximação a uma contagem contínua no tempo, ou seja, uma contagem a cada instante t para os resultados da simulação. Isso significa que o responsável pela portaria anota a variação da contagem na catraca de entrada a cada 5 minutos desde as 9 horas até as 16 horas. Uma contagem contínua seria o registro dessas variações a todo instante $dt$. Assim, assumir-se-á que todos $N(t=5\;min)$ no $i-$ésimo instante chegam juntos e exatamente ao final do instante. Por exemplo, se para o $5º$ instante $N(t=5)=2$, então, $2$ pessoas chegaram ao pronto atendimento em $9$ horas $+ 5 \cdot 5$ minutos, ou seja, exatamente $2$ pessoas chegam ao pronto atendimento juntas, independente e coincidentemente às $9:25$ exatamente.
+
+Isso será simulado por meio da função `rpois` que gerará os $\frac{7\;horas}{5\;min}\cdot \frac{60\;min}{1\;hora}=84$ intervalos segundo um valor esperado $\lambda t = \frac{1\; pessoa}{10\;min}\cdot 5 \; min$. 
+
+Depois disso, haverá uma rotina para estabelecer o instante de chegada para cada cliente segundo uma FILA por ordem de chegada. Então, com algumas funções auxiliares construídas para evitar repetições no código, construir-se-á a rotina que irá construir um vetor indicando o início dos atendimentos individuais gerado considerando um vetor auxiliar de tamanho 2 indicando o final dos atendimentos atuais individuais em cada um dos consultórios para que seja construída uma MATRIZ de duas colunas em que cada linha indica o início de um atendimento individual para o consultório médico referido pela coluna. Também, nessa rotina há a construção da representação em um vetor linha dos horários de início de atendimento segundo a FILA e o tempo de duração de cada consulta gerados pela função `runif` na faixa de tempo de 5 minutos a 20 minutos. E finalmente, é construído um subvetor de 2 colunas indicando o horário de termino dos atendimentos. Todos os subvetores gerados serão repassados pela função permitindo que sejam gerados a MATRIZ, um vetor coluna com os horários de início de atendimento e , a partir daí, o vetor com cada um dos atrasos é gerado pela diferença entre os vetores colunas atendimento e fila.
+
+## PARTE 2: Solução Computacional
+
+> Escreva um programa em R para simular este processo apenas uma vez e responda às seguintes questões:
+
+```{r}
+N<-rpois(84,((1/10)*(5)) )
+#N
+```
+
+```{r}
+#instant<-c(rep(0,length(N)))
+FILA<-c()
+for ( i in 1:length(N)){
+  if(N[i]>0){
+    for(j in 1:N[i]){
+      FILA<-c(FILA,5*i)
+    } 
+  }
+}
+#FILA
+T1<-0
+T2<-0
+#<-function(T,)
+
+```
+
+```{r}
+T1<-0
+T2<-0
+
+MENOR<-function(t1,t2){
+  if(t1<=t2){
+    return(1)
+  }
+  else{
+    return(2)
+  }
+}
+
+MAIOR<-function(t1,t2){
+  if(t1>=t2){
+    return(1)
+  }
+  else{
+    return(2)
+  }
+}
+
+
+# I = v[k] #INSERIR o maior valor
+ATUALIZAR<-function(I,u,dt){
+  if(I==0){
+    return(u)
+  }
+  else{
+    #dt<-runif(1,5,20)
+    V<-c(u,I+dt)
+    VR<-MAIOR(V[1],V[2])#OBTENÇÃO DO ÍNDICE DO MAIOR VALOR
+    return(V[VR])
+  }
+}
+
+# I = v[k] #INSERIR o maior valor
+
+SIMULING<-function(f){
+  
+  MATRIX<-c()
+  v<-c(0,0)
+  MATRIX<-c(MATRIX,v)
+  time_f<-c(0,0)
+  #MATRIZ<-c(0,0)
+  #COUNT<-0
+  LINEAR<-c()
+  for(i in f){
+    #k=MENOR(v[1],v[2])#ÍNDICE do menor instante fornecido 
+    k=MENOR(time_f[1],time_f[2])#ÍNDICE do menor instante fornecido
+    dt<-runif(1,5,20)
+    v[k]<-ATUALIZAR(v[k],i,dt)#atualizar o instante de início
+    time_f[k]<-ATUALIZAR(time_f[k],i,dt)#atualizar o menor instante de encerramento
+    MATRIX<-c(MATRIX,v)
+    LINEAR<-c(LINEAR,v[k])
+    #print(v)
+  }
+  FINAL<-c(runif(1,5,20),runif(1,5,20))
+  FINAL<-FINAL+c(MATRIX[length(MATRIX)-1],MATRIX[length(MATRIX)])
+  return(c(LINEAR,MATRIX,FINAL))
+}
+```
+
+```{r}
+print(FILA)
+cat("                                 \n")
+cat("#################################\n")
+cat("                                 \n")
+A<-SIMULING(FILA)
+#MATRIX<-matrix(A[],ncol=2,byrow=TRUE)
+#MATRIX
+ATENDIMENTO<-A[1:length(FILA)]
+ATENDIMENTO<-matrix(ATENDIMENTO,ncol=1,byrow=TRUE)
+ATENDIMENTO
+fila<-matrix(FILA,nco=1,byrow=TRUE)
+fila
+ATRASO<-ATENDIMENTO-fila
+ATRASO
+MATRIX<-A[(1+length(FILA)):(length(A)-2)]
+FINAL<-A[(length(A)-1):(length(A))]
+rm(FILA)
+MATRIX<-matrix(MATRIX,ncol=2,byrow=TRUE)
+MATRIX
+FINAL
+rm(A)
+
+```
+
+A) Quantos pacientes vieram até a clínica?
+
+```{r}
+cat(sum(N)," ", "pacientes vieram até a clínica")
+```
+
+
+B) Quantos pacientes tiveram que aguardar para serem atendidos?
+```{r}
+ATRASADOS<-ATRASO[ATRASO>0]
+ATRASADOS<-length(ATRASADOS)
+cat(ATRASADOS,"pacientes tiveram que aguardar para serem atendidos")
+```
+
+C) Qual o tempo médio de espera?  
+```{r}
+cat(sum(ATRASO)/ATRASADOS,"minutos foi o tempo médio de espera")
+```
+
+D) A que horas a clínica fechou? 
+```{r}
+h<-9+FINAL[MAIOR(FINAL[1],FINAL[2])]/60
+H<-trunc(h,prec=0)
+if(H<16){
+  H<-16
+  h<-16
+}
+m<-(h-H)*60
+m<-round(m,0)
+cat("a clínica fechou às", H, "horas e", m, "minutos")
+
+```
+
+## PARTE 2: Simulação de Monte Carlo
+
+----
+
+> Utilize simulação de Monte Carlo para analisar a qualidade do atendimento prestado aos pacientes. As soluções devem ser dadas em termos da mediana estimada e de intervalos (aproximados) de 95% de confiança construídos a partir de 100 replicações independentes para cada uma das perguntas nos itens acima.
+
+> Não esqueça de fornecer resumos gráficos e numéricos para substanciar sua análise. 
+
+Para isso é preciso encapsular cada rotina de extração da resposta da simulação.
+
+
+```{r}
+
+vieram<-function(n){
+  k<-sum(n)
+  return(k)
+}
+
+#############
+
+atrasados<-function(ATRASO){
+  ATRASADOS<-ATRASO[ATRASO>0]
+  ATRASADOS<-length(ATRASADOS)
+  return(ATRASADOS)
+}
+#ATRASADOS<-atrasados(ATRASO)
+
+
+#############
+
+tempo.medio<-function(ATRASO,ATRASADOS){
+  return(sum(ATRASO)/ATRASADOS)
+}
+
+#############
+
+tempo.encerramento<-function(FINAL){
+  h<-9+FINAL[MAIOR(FINAL[1],FINAL[2])]/60
+  H<-trunc(h,prec=0)
+  if(H<16){
+    H<-16
+    h<-16
+  }
+  return(h)
+}
+###########################
+v<-c()
+a<-c()
+A<-c()
+t.m<-c()
+t.e<-c()
+
+###########################
+for(t in 1:100){
+  N<-rpois(84,((1/10)*(5)) )
+  FILA<-c()
+  for ( i in 1:length(N)){
+    if(N[i]>0){
+      for(j in 1:N[i]){
+        FILA<-c(FILA,5*i)
+      } 
+    }
+  }
+  A<-SIMULING(FILA)
+  ATENDIMENTO<-A[1:length(FILA)]
+  ATENDIMENTO<-matrix(ATENDIMENTO,ncol=1,byrow=TRUE)
+  fila<-matrix(FILA,nco=1,byrow=TRUE)
+  ATRASO<-ATENDIMENTO-fila
+  MATRIX<-A[(1+length(FILA)):(length(A)-2)]
+  FINAL<-A[(length(A)-1):(length(A))]
+  rm(FILA)
+  MATRIX<-matrix(MATRIX,ncol=2,byrow=TRUE)
+  rm(A)
+  
+
+  #v<-c(v,vieram(N))
+  v[t]<-vieram(N)
+  #a<-c(a,atrasados(ATRASO))
+  a[t]<-atrasados(ATRASO)
+  #t.m<-c(t.m,tempo.medio(ATRASO,ATRASADOS))
+  t.m[t]<-tempo.medio(ATRASO,ATRASADOS)
+  #t.e<-c(t.e,tempo.encerramento(FINAL))
+  t.e[t]<-tempo.encerramento(FINAL)
+}
+
+V<-median(v)
+A<-median(a)
+T.M<-median(t.m)
+T.E<-median(t.e)
+
+
+v.dist <- density(v)
+
+plot(v.dist,
+    main = "Pacientes Density Estimate")
+abline(v = V, col=2 , lty="dashed") 
+#abline(v = c(quantile(v.dist, probs = c(0.025, 0.975))),
+  #    col = "blue", lty = "dashed")
+#quantile(v.dist,prob=0.025,na.rm=TRUE)
+
+a.dist <- density(a)
+
+plot(a.dist,
+    main = "atrasados Density Estimate")
+abline(v = A, col=2 , lty="dashed") 
+
+t.m.dist <- density(t.m)
+
+plot(t.m.dist,
+    main = "Tempo médio de espera Density Estimate")
+abline(v = T.M, col=2 , lty="dashed") 
+
+t.e.dist <- density(t.e)
+
+plot(t.e.dist,
+    main = "Tempo de Encerramento da clínica Density Estimate")
+abline(v = T.E, col=2 , lty="dashed") 
+
+
+confidence<-function(X){
+  min<-mean(X)
+  max<-mean(X)
+  s<-sd(X)
+  t<-qt(0.975,100-1)
+  min<-min-(t*s/sqrt(100))
+  max<-max+(t*s/sqrt(100))
+  INTERVAL<-c(min,max)
+  return(INTERVAL)
+}
+
+v.interval<-confidence(v)
+a.interval<-confidence(a)
+t.m.interval<-confidence(t.m)
+t.e.interval<-confidence(t.e)
+
+
+#Intervalo de confidência para a quantidade de pacientes
+v.interval
+
+#Intervalo de confidência para a quantidade de atrasados
+a.interval
+
+#Intervalo de confidência para o tempo médio de espera
+t.m.interval
+
+#Intervalo de confidência para o tempo de encerramento.
+t.e.interval
+
+```
+
+
+
+Portanto,observa-se que os intervalos de confidência e a distribuição dos resultados evidenciam que o atendimento possui boa qualidade porque o tempo médio de espera tende a ser em média menor que a metade do tempo máximo estimado para uma consulta, o tempo de encerramento tende a não ser muito além das 16 horas e a quantidade de atrasados tende a ser em média menor que 20, o que é normalmente menor que a metade da quantidade de pacientes.
+
+
+----
+
+## Referências
+
+https://web.stanford.edu/class/bios221/labs/simulation/Lab_3_simulation.html
+
+https://www.cyclismo.org/tutorial/R/confidence.html
+
+https://en.wikipedia.org/wiki/Confidence_interval
+

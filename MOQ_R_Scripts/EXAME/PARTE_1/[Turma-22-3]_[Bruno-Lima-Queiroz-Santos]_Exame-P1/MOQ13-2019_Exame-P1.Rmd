@@ -1,0 +1,87 @@
+---
+Encoding: UTF-8 Unicode
+title: 'Exame de MOQ-13: PARTE 1'
+subtitle: "Problema 01 (5,0 pts)"
+author: 
+  - name: "Aluno: Bruno Lima Queiroz Santos"
+  - name: "Turma T22.3"
+  - name: "Professora: Denise B. Ferrari"
+date: 'Data: 22/11/2019'
+output:
+  html_document:
+    theme: sandstone
+    df_print: paged
+    number_sections: FALSE  
+---
+```{r include = FALSE}
+knitr::opts_chunk$set(eval = TRUE, echo = TRUE)
+```
+
+
+
+## Instruções:
+
+----
+
+1. As respostas serão avaliadas com relação à:  
+  (i) reprodutibilidade;  
+  (ii) correção; e  
+  (iii) completude da solução proposta, devendo incluir:
+
+    + Enunciado do problema  
+    + Apresentação da estratégia de solução  
+    + Resultados (resumos numéricos e gráficos)  
+    + Análise dos resultados obtidos  
+    + Código R comentado  
+    + Referências (textos, sites etc.)
+
+**OBS:**  
+Existe um volume enorme de código disponível na internet para resolver praticamente qualquer problema. O reuso de código obtido online é permitido, desde que citada a fonte (mesmo que tenha sido utilizada apenas como inspiração...)
+
+**Prazo: 06/12/2019**
+
+**Entregáveis:**
+
++ Todos os arquivos utilizados para realizar a tarefa, organizados em uma pasta, seguindo o modelo:  
+```
+[Turma-22-X]_[Nome-Aluno]_Exame-P1
+  |-data
+  |-img
+  |-[Turma-22-X]_[Nome-Aluno]_Exame-P1.html
+  |-[Turma-22-X]_[Nome-Aluno]_Exame-P1.Rmd
+```  
++ Submeter todo o material em uma pasta via **CLASSROOM**.
+
+
+## Introdução
+
+----
+
+Em um pronto-atendimento oftalmológico há 2 consultórios médicos. A clínica abre às 9h e os pacientes chegam de acordo com um processo de Poisson com taxa 10min, ou seja, este é o tempo esperado de chegada do primeiro cliente após a abertura da clínica. Os pacientes podem ser atendidos indiscriminadamente por qualquer um dos plantonistas. Ao chegar na clínica, o paciente aguarda até que um dos médicos esteja disponível. A duração de cada consulta é uma variável aleatória uniformemente distribuída entre 5 e 20 minutos. A clínica deixa de admitir novos pacientes às 16h e fecha após terminado o atendimento do último paciente.
+
+## PARTE 1:  Estratégia de Solução Computacional
+
+----
+
+> Apresente a estratégia adotada para solução computacional.
+
+
+## PARTE 2: Solução Computacional
+
+> Escreva um programa em R para simular este processo apenas uma vez e responda às seguintes questões:
+
+A) Quantos pacientes vieram até a clínica?  
+B) Quantos pacientes tiveram que aguardar para serem atendidos?  
+C) Qual o tempo médio de espera?  
+D) A que horas a clínica fechou? 
+
+## PARTE 2: Simulação de Monte Carlo
+
+----
+
+> Utilize simulação de Monte Carlo para analisar a qualidade do atendimento prestado aos pacientes. As soluções devem ser dadas em termos da mediana estimada e de intervalos (aproximados) de 95% de confiança construídos a partir de 100 replicações independentes para cada uma das perguntas nos itens acima.
+
+> Não esqueça de fornecer resumos gráficos e numéricos para substanciar sua análise. 
+
+----
+

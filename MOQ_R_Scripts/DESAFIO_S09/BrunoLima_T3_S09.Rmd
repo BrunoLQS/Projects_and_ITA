@@ -1,0 +1,344 @@
+---
+title: "Desafio - S09"
+author: "Bruno Lima Queiroz Santos T22.3"
+date: "DUE 22/11/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+====================================
+
+Copie a coluna ASK (coluna Y) do excel.
+
+```{r}
+library("openxlsx")      
+#my_data <- read.table(file = "clipboard", 
+                      #sep = "\t", header=TRUE)
+my_data <- openxlsx::read.xlsx("C:/Rprograms/S09/consulta6-2018.xlsx")
+x<-my_data[,"ASK"] #extraindo um vetor do dataset !
+x<-x[!is.na( x )] # extraindo caracteres vazios
+x<-x[x!=0] # extraindo zeros
+summary(x) # descrição de características da variável
+
+```
+
+Entao, é possível ver que:
+
+$$1- Mean = 11255924 $$
+
+$$3- Median = 2948190 $$
+
+```{r}
+freq=table(x) # criando uma tabela de ocorrências
+
+names(freq)[freq==max(freq)] # descrevendo o nome da moda
+
+``` 
+
+$$2- Moda = 597552 $$
+
+```{r}
+var(x) # calculando a variância da variável
+```
+$$4-Variância=5,16 \cdot 10^{14}$$
+
+```{r}
+sd(x) # calculando o desvio padrão da variável
+
+```
+
+$$5- Desvio \enspace padrão = 22707112$$
+
+```{r}
+mad(x) #  calculando the median absolute deviation
+
+```
+
+$$6- Desvio \enspace mediano \enspace absoluto = 4175710$$
+
+### 7- Construindo um boxplot para os dados originais com outliers:
+&nbsp;
+```{r}
+boxplot(x,horizontal=TRUE, col="lightblue",outline=TRUE,main="BOXPLOT DADOS ORIGINAIS") #bloxplot horizontal
+
+```
+
+### Construindo um boxplot para os dados originais sem outliers:
+&nbsp;
+
+```{r}
+boxplot(x,horizontal=TRUE, col="blue",outline=FALSE) #bloxplot horizontal
+
+```
+
+### Padronização dos dados
+&nbsp;&nbsp;
+
+```{r}
+Z=(x-mean(x))/(sd(x))
+```
+
+#### Testanto a amostra padronizada:
+&nbsp;&nbsp;
+
+```{r}
+print(mean(Z)) #Printando a média de Z
+# A média deve ser nula
+
+print(sd(Z)) # Exibindo o desvio padrão de Z
+# O desvio padrão deve ser a unidade
+
+print(var(Z)) #Exibindo a variância de Z
+# A variância deve ser a unidade
+```
+
+&nbsp;&nbsp;
+
+```{r}
+boxplot(Z,horizontal=TRUE, col="lightgreen",outline=TRUE,main="boxplot dados padronizados") #bloxplot horizontal
+
+```
+
+### 8- Apresentando um histograma para os dados originais e os padronizados:
+&nbsp;
+
+```{r}
+hist(
+    x,breaks=100,
+    xlab= "Dados ASK original",
+    freq = FALSE,col="lightblue",
+    main = "Histograma dos dados originais "
+    )
+```
+
+&nbsp;&nbsp;
+
+```{r}
+hist(
+    Z,
+    xlab= "Dados ASK padronizado",
+    freq = FALSE,col="lightgreen",
+    main = "Histograma dos dados padronizados ",
+    
+    #breaks=seq(-2,16,2),
+    
+    breaks=50,
+    xlim=c(-1,15),
+    border="black",
+    )
+```
+&nbsp;&nbsp;
+
+### 9 e 10- QQPlot e QQLine sobre os dados:
+
+&nbsp;&nbsp;
+```{r}
+library("car")
+qqPlot(x)
+qqline(x,col="red",lwd=2)
+```
+
+
+### 11- Assimetria amostral não viesada
+
+&nbsp;&nbsp;
+
+Utilizando:
+
+$s_{3}= \frac{n}
+{
+(n-1)(n-2)
+}\cdot
+\sum^{n}_{i=1}
+( \frac{X_{i}-\overline{X}}{s}
+)^{3}$ 
+&nbsp;&nbsp;
+
+```{r}
+n<-length(x)
+s_3<-(n/((n-1)*(n-2)))*sum(((x-mean(x))/sd(x))^3)
+#s_3<-sum(Z^3)/n
+
+```
+&nbsp;&nbsp;
+
+obtém-se a Assimetria amostral não viesada:
+
+```{r}
+print(s_3)
+```
+
+&nbsp;&nbsp;
+
+Concebendo resultados pelo pacote e1071
+&nbsp;&nbsp;
+
+```{r}
+library(e1071)
+skewness(x,1)
+skewness(x,2)
+skewness(x,3)
+```
+
+&nbsp;&nbsp;
+
+Concebendo resultados pelo pacote moments
+```{r}
+library("moments")
+skewness(x)
+```
+
+&nbsp;&nbsp;
+
+Percebe-se que os resultados gerados são consistentes e compatíveis entre si.
+
+A assimetria amostral dos dados indica o comportamento dos desvios das observações em relação a sua média. Ou seja, a assimetria amostral significa a diferença entre os desvios das observações à direita e à esquerda da média das observações.
+Portanto, o Coeficiente de Assimetria Amostral dos dados é positivo, logo a distribuição é assimétrica positiva, denotando a existência de pontos positivos (outliers positivos) muito maiores do que os negativos.
+
+&nbsp;&nbsp;
+
+
+### 12- Curtose amostral não viesada
+
+&nbsp;&nbsp;
+
+Calculando-se a curtose amostral:
+
+$$s_{4}=
+\frac{
+    n(n+1)
+}{
+    (n-1)(n-2)(n-3)
+}\sum^{n}_{i=1}
+\Bigg(
+    \frac{
+        X_{i}-\overline{X}
+}{
+    s
+}
+\Bigg)^{4}-3\frac{(n-1)^{2}}{(n-2)(n-3)}$$
+
+&nbsp;&nbsp;
+
+```{r}
+
+s_4<-((n*(n+1))/((n-1)*(n-2)*(n-3)))*sum(((x-mean(x))/sd(x))^4)-(3*((n-1)^2))/((n-2)*(n-3))
+
+```
+
+&nbsp;&nbsp;
+
+```{r}
+print(s_4)
+```
+
+&nbsp;&nbsp;
+Concebendo resultados pela library e1071
+```{r}
+library("e1071")
+kurtosis(x,3)
+kurtosis(x,2)
+kurtosis(x,1)
+```
+&nbsp;&nbsp;
+
+Concebendo resultados pela library moments
+```{r}
+library("moments")
+kurtosis(x)
+
+```
+&nbsp;&nbsp;
+
+
+Assim, percebe-se que os resultados gerados são consistentes e compatíveis.
+
+&nbsp;&nbsp;
+
+Curtose é uma medida que avalia o achatamento da curva da função de distribuição.Assim, obteve-se uma função de distribuição leptocúrtica, cujo coeficiente de curtose é maior que zero, possuindo uma curva mais afunilada, com um pico mais agudo, acentuado do que o de uma distribuição normal.
+
+&nbsp;&nbsp;
+
+### 13-Testes de Normalidade
+
+&nbsp;&nbsp;
+
+#### i) Teste de Kolmogorov-Smirnov [ks.test]
+&nbsp;&nbsp;
+
+
+Hipótese nula $H_{0}$: os dados seguem uma distribuição normal.
+&nbsp;&nbsp;
+Hipótese $H_{1}$: os dados não seguem uma distribuiçao normal.
+&nbsp;&nbsp;
+
+Este teste examina a maior diferença absoluta entre a função distribuição acumulada assumida para os dados, isto é, entre a Normal e a empírica. O seu critério é a comparação a um valor crítico, para um dado nível de significância.
+
+```{r}
+y<-rnorm(length(x))
+ks.test(x,y)
+```
+
+&nbsp;&nbsp;
+
+De acordo com o teste de normalidade, p-valor foi menor que $0.05$, isto é, menor que $5.0\%$, o que significa que o teste rejeita a hipótese de normalidade, ou seja, a hipótese nula é rejeitada.
+
+&nbsp;&nbsp;
+
+#### ii) Teste de Shapiro-Wilk [shapiro.test]
+&nbsp;&nbsp;
+
+```{r}
+shapiro.test(x[1:5000])
+
+```
+
+Este teste é irrealizável pela função do R para um conjunto de dados muito grande, como é este caso. Porém, pode-se aplicar o teste a um subconjunto do conjunto de dados. 
+
+Após aplicar esse teste, obteve-se a rejeição da hipótese de normalidade, ou seja, o teste rejeitou a hipótese nula, porque o p-valor é menor que $5.0\%$.
+
+&nbsp;&nbsp;
+
+
+#### iii) Teste de Anderson-Darlin [ad.test]
+
+&nbsp;&nbsp;
+
+```{r}
+library(nortest)
+ad.test(x)
+```
+
+&nbsp;&nbsp;
+
+Então, a hipótese nula é rejeitada pelo teste, porque o p-valor é menor que $5.0\%$.Portanto, o teste rejeita a hipótese de normalidade.
+
+&nbsp;&nbsp;
+
+#### iv) Lilliefors [lillie.test]
+
+```{r}
+lillie.test(x)
+```
+
+&nbsp;&nbsp;
+
+Então, a hipótese nula é rejeitada pelo teste, porque o p-valor é menor que $5.0\%$.Portanto, o teste rejeita a hipótese de normalidade.
+
+#### Comparativo entre os testes de Normalidade.
+
+Como comparação sucinta, pode-se observar a propriedade destaque de cada teste.
+
+O KS test requer que a distribuição nula, isto é, a distribuição de referência, seja completamente especificada com parâmetros conhecidos.
+
+O lillie test é uma modificação do KS test. Ele é adequado quando os parâmetros desconhecidos da distribuição nula devem ser estimados de uma amostra de dados.
+
+O AD test é uma modificação do KS test. Ele atribui mais peso às caudas do que o KS test.
+
+O Shapiro test é um teste poderoso e adequado mesmo para um pequeno número de observações. Porém, ao contrário dos demais testes, Shapiro test é aplicável apenas para checar distribuições normais.
+
+

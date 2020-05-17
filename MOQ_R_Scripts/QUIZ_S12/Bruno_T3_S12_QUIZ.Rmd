@@ -1,0 +1,89 @@
+---
+title: "Bruno_T3_S12_QUIZ"
+author: "Bruno Lima Queiroz Santos"
+date: "26/11/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library("car")
+```
+
+# Questão 1
+
+```{r}
+X<-c(2.5, 3.0, 3.1, 4.0, 1.2, 5.0, 4.1, 3.9, 3.2, 3.3, 2.8, 4.1, 2.7, 2.9, 3.7)
+
+par(mfrow=c(2,2))
+hist(X)
+
+d<-density(X)
+plot(d,type="l")
+
+
+boxplot(X,horizontal=TRUE)
+
+
+qqnorm(X,xaxt="n",yaxt="n",xlab="",ylab="",main="Q-Q")
+qqline(X,col=2,lwd=2,lty=2)
+
+```
+
+```{r}
+X<-c(2.5, 3.0, 3.1, 4.0, 1.2, 5.0, 4.1, 3.9, 3.2, 3.3, 2.8, 4.1, 2.7, 2.9, 3.7)
+shapiro.test(X)
+
+mean(X)
+
+Z<-mean(X)-2.0
+s<-sd(X)
+n<-length(X)
+Z<-Z/s
+Z<-Z*sqrt(n)
+
+
+#VALOR
+print(Z)
+print(qt(0.025,n-1))
+print(qt(1.0-0.025,n-1))
+#INDEX
+print(n)
+
+#Limite
+qt(1.0-2*0.025,n-1)
+
+1-pt(Z,n-1)
+```
+
+## QUESTÃO 9
+
+```{r}
+X<-c(2.5, 3.0, 3.1, 4.0, 1.2, 5.0, 4.1, 3.9, 3.2, 3.3, 2.8, 4.1, 2.7, 2.9, 3.7)
+n<-15
+graus.lib<-(n-1)
+media<-mean(X)
+desv.pad<-sd(X)
+mi<-2.0
+t.obs<-(media-mi)/(desv.pad/(n^0.5))
+t.obs
+p.valor<-round(pt(t.obs,graus.lib,lower.tail=F),4)
+p.valor
+
+if(p.valor<0.05){
+  cat("Rejeita Ho.")
+}else{
+  cat("Não Rejeita Ho.")
+}
+
+```
+
+## Questão 10
+
+```{r}
+X<-c(2.5, 3.0, 3.1, 4.0, 1.2, 5.0, 4.1, 3.9, 3.2, 3.3, 2.8, 4.1, 2.7, 2.9, 3.7)
+t.test(X,alternative="greater",mu=2)
+
+
+```

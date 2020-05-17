@@ -1,0 +1,221 @@
+---
+title: "EXAME_PARTE_II-MOQ-13"
+author: "Bruno Lima Queiroz Santos"
+date: "30/11/2019"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Questão 1
+
+a)
+
+Um teste adequado a ser realizado é o teste t-student para as variações amostrais.
+Hipótese Nula: $H_{0}: \mu=4$ , Hipótese alternativa: $H_{a}<4$.
+Sendo a amostra de $n=20$ elementos, com uma variância de $s^{2}=5.62 \Leftrightarrow s=\sqrt{5.62}$ .
+
+$$t_{n-1} \sim \frac{\overline{x}-\mu}{s/\sqrt{n}} \equiv \frac{\Delta x}{s/\sqrt{n}}$$
+$$\Leftrightarrow P(\Delta x \geq 4)= P\Bigg[t_{n-1}\geq\frac{4\sqrt{n}}{s}\Bigg]=P\Bigg[t_{n-1}\geq7.54583\Bigg]$$
+```{r Cálculo da Probabilidade}
+
+n<-20
+x<-4
+x<-x*sqrt(20)
+x<-x/sqrt(5.62)
+cat("A probabilidade P(t_n-1>7.54583) = ", round(pt(x,n-1,lower.tail=FALSE),8))
+```
+
+Criando uma amostra e testando-a.
+```{r Teste}
+X<-rnorm(n,mean=0,sd=sqrt(5.62))
+Y<-X
+Y<-Y-mean(Y)
+Y<-Y/sd(Y)
+Y<-Y*sqrt(length(Y))
+t.test(Y,alternative="less",mu=4,conf.level=0.90)
+```
+De acordo com o teste realizado, a hipótese nula é descartada por um t-test de significância $\alpha=0.10$ aplicado sobre uma amostra de distribuição normal com $\mu=0$,$\sigma^{2}=5.62$
+
+b)
+
+O poder do teste é $P($ rejeitar $H_{0} | H_{a}$ verdadeira$)$. Assumindo que $H_{a}$ é verdadeira, a probabilidade é justamente $P(\Delta x < 4)=P\Bigg[t_{n-1}<\frac{4\sqrt{n}}{s} \equiv q\Bigg]$
+```{r}
+quantil<-function(N,S,Mu){
+  q<-Mu
+  q<-q*sqrt(N)
+  s<-sqrt(S) # STANDARD_DEVIATION by variance
+  q<-q/s
+  return(q)
+}
+q<-quantil(n,5.62, 4.0)
+Power<-pt(q,n-1)
+cat("O poder do teste é = ", Power)
+```
+O poder do teste é $99.99998\%$
+
+Para $\sigma_{A}^{2}=7$:
+
+```{r}
+q<-quantil(n,7.0, 4.0)
+Power<-pt(q,n-1)
+cat("O poder do teste é = ", Power)
+```
+O poder do teste é $99.99991\%$
+
+c)
+
+$n \propto q^{2} \;\; | \;\;P\Bigg[ t < q\Bigg]=0.90$.
+```{r}
+s<-sqrt(7.0)
+n<-10
+F_quantile<-function(n,s){
+  Q<-(4.0*sqrt(n))/s
+  return (p<-pt(Q,n-1))
+}
+p<-100
+while(p>0.90 & n>1){
+  p<-F_quantile(n,sqrt(7.0))
+  n<-n-1
+}
+cat("n = ", n+1, "p = ", p)
+F_quantile(2,sqrt(7.0))
+F_quantile(3,sqrt(7.0))
+```
+
+Portanto, é possível concluir que $n=3$ garante potência de $0.90$ com $\sigma^{2}_{A}=7$
+
+### Questão 2
+
+```{r}
+A<-c(776.58,672.00,1251.60,1133.58,797.58,965.58,735.00,1173.90,1238.58,1362.90,949.20,1385.58,839.58,562.38)
+B<-matrix(A,ncol=2)
+B
+B<-B/4.20
+A<-A/4.20
+
+```
+i) Preços em Dólar
+```{r}
+B
+```
+ii) 
+
+Média
+```{r}
+mean(A)
+```
+Desvio Padrão
+```{r}
+sd(A)
+```
+boxplot
+```{r}
+boxplot(
+        A,
+        xlab = "Preços das casas (em milhares de USD)",
+        horizontal=TRUE,
+        main = "Boxplot"
+    )
+```
+QQPlot
+```{r}
+##qqnorm(A,xaxt="n",yaxt="n",xlab="",ylab="",main="Q-Q")
+qqnorm(A)
+qqline(A,col=2,lwd=2,lty=2)
+```
+
+É evidenciada uma distribuição simétrica em torno da média, ou de um valor razoavelmente próximo da média, levantando suspeitas sobre ser uma distribuição normal.
+
+iii) Testes de normalidade
+
+### Teste de Kolmogorov-Smirnov [ks.test]
+
+
+```{r}
+y<-rnorm(length(A))
+ks.test(A,y)
+
+y<-rnorm(length(A),sd=sd(A))
+ks.test(A,y)
+
+y<-rnorm(length(A),mean=mean(A))
+ks.test(A,y)
+
+y<-rnorm(length(A),mean=mean(A),sd=sd(A))
+ks.test(A,y)
+
+```
+
+### Teste de Shapiro-Wilk [shapiro.test]
+
+```{r}
+shapiro.test(A)
+```
+
+### Teste de Anderson-Darlin [ad.test]
+
+```{r}
+library(nortest)
+ad.test(A)
+```
+
+### Lilliefors [lillie.test]
+
+```{r}
+lillie.test(A)
+```
+
+Conclusão:
+
+Todos os testes apresentam p-valor maior que $5.0 \%$, inclusive o teste de Kolmogorov-Smirnov, em uma análise mais atenta, observando-se que há compatibilidade entre uma amostra normal cujos parâmetros populacionais têm valores próximos dos parâmetros estimados a partir da amostra analisada, embora o teste rejeite a hipótese nula quando não se fornecem os parâmetros populacionais compatíveis com o da amostra, isto é, os parâmetros padrão $\mu=0, \sigma=1$ não são compatíveis com os da amostra. Ou seja, há evidências de que a amostra segue uma distribuição normal não padronizada, pois a hipótese nula de que a função de distribuição é igual a uma função de distribuição normal não pode ser descartada com significância de 0.05 por qualquer um dos testes.
+
+iv)
+$$t_{n-1} \sim \frac{\overline{x}-\mu}{s/\sqrt{n}}$$
+$$P\Bigg[ t_{(\alpha/2,n-1)} \leq\frac{\overline{x}-\mu}{s/\sqrt{n}}\leq t_{(1-\alpha/2,n-1)} \Bigg]=\alpha$$
+
+$$\Leftrightarrow P\Bigg[ (s/\sqrt{n})t_{(\alpha/2,n-1)} \leq\overline{x}-\mu\leq t_{(1-\alpha/2,n-1)}(s/\sqrt{n}) \Bigg]=\alpha$$
+
+$$\Leftrightarrow P\Bigg[ (-)t_{(1-\alpha/2,n-1)}(s/\sqrt{n}) \leq\mu-\overline{x}\leq(s/\sqrt{n})(-)t_{(\alpha/2,n-1)}\Bigg]=\alpha$$
+
+usando-se que :
+
+$$0=t_{(1-\alpha/2,n-1)}+t_{(\alpha/2,n-1)} \Leftrightarrow -t_{(\alpha/2,n-1)} = + t_{(1-\alpha/2,n-1)}$$
+
+$$\Rightarrow P\Bigg[ \overline{x}-t_{(1-\alpha/2,n-1)}(s/\sqrt{n}) \leq\mu\leq\overline{x}+t_{(1-\alpha/2,n-1)}(s/\sqrt{n})\Bigg]=\alpha$$
+
+Logo, $\alpha=0.05 \Leftrightarrow \frac{\alpha}{2}=0.025$ e $n=14$ :
+$$\overline{x}-t_{(0.975,13)}(s/\sqrt{14}) \leq\mu\leq\overline{x}+t_{(0.975,13)}(s/\sqrt{14})$$
+Com : 
+$\overline{x}=\sum \frac{x_{i}}{n}$,$s=\sqrt{\frac{(x_{i}-\overline{x})^{2}}{n-1}}$
+```{r}
+x<-sum(A)
+n<-length(A)
+x<-x/n
+s<-(A-x)^2
+s<-sum(s)
+s<-s/(n-1)
+s<-sqrt(s)
+
+x_inf<-x-qt(0.975,13)*(s/sqrt(14))
+x_sup<-x+qt(0.975,13)*(s/sqrt(14))
+cat("95% por cento IC:", x_inf,"  ",x_sup)
+
+t.test(A)
+```
+De onde obtêm-se os mesmos resultados para o intervalo de confidência $95\%$.
+
+v)
+
+```{r}
+t.test(A,conf.level=0.95)
+```
+
+De acordo com o intervalo de confidência de $95\%$, há evidências com significância de $0.05$ de que a alegação do corretor é falsa, pois a média alegada está fora do Intervalo de Confidência de $95\%$. Ou seja, a estimativa é de que a cada 100 amostras, apenas 5 contenham a média de preço fora do intervalo de confidência, ao contrário das demais 95.
+
+
+

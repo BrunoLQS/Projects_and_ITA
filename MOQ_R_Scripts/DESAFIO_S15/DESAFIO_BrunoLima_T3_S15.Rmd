@@ -1,0 +1,93 @@
+---
+title: "DESAFIO_BrunoLima_T3_S15"
+author: "Bruno Lima Queiroz Santos"
+date: "27/11/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library("openxlsx") 
+```
+
+====================================
+
+&nbsp;&nbsp;
+
+
+### 1 - Importe e leia o arquivo.
+
+
+```{r}
+file<-"C:/Users/Bruno Lima/Desktop/R_Scripts/DESAFIO_S15/Tabela1.xlsx"
+X <- openxlsx::read.xlsx(file, sheet=1)
+
+```
+
+### 2 - Calcule as médias e desvios padrões do Esquema Anterior e do Esquema Novo (dados em milhares)
+
+```{r}
+mean(X[,"Esquema.Anterior.(em.milhares)"])#Média
+sd(X[,"Esquema.Anterior.(em.milhares)"])#Desvio padrão
+#mean(X[,"Esquema Anterior (em milhares)"])
+#sd(X[,"Esquema Anterior (em milhares)"])
+
+mean(X[,"Esquema.Novo.(em.milhares)"])#Média
+sd(X[,"Esquema.Novo.(em.milhares)"]) #Desvio padrão
+#mean(X[,"Esquema Novo (em milhares)"])
+#sd(X[,"Esquema Novo (em milhares)"])
+
+
+```
+### 3 - Descreva o teste de significância de cinco por cento que você aplicaria a esses dados para determinar se o Esquema Novo aumentou os resultados? A que conclusão o teste leva? 
+
+Aplicaria o teste de significância de 5 por cento de t-student para a variação dos esquemas para cada vendedor com hipótese nula $H_{0}: \mu=0$
+```{r}
+A<-X[,"Esquema.Anterior.(em.milhares)"]
+A<- X[,"Esquema.Novo.(em.milhares)"]-A
+t.test(A,mu=0)
+```
+
+Esse teste leva a conclusão de que a hipótese nula é verdadeira com uma significância de 0.95, pois p-valor é maior que 5%. Ou seja, há evidências de que os esquemas não aumentaram. 
+
+### 4 - Suponha que tenha sido calculado que, para que a Uranus tenha um break even, a produção média deve aumentar em 5000. Se esta situação é uma hipótese alternativa, qual é:
+a
+
+### (a) A probabilidade de um erro Tipo 1?
+```{r}
+K<-mean(A)
+K<-K-5.0
+K<-K/sd(A)
+K<-K*sqrt(length(A))
+K
+```
+A probabilidade de cometer o erro tipo 1 é de rejeitar a hipótese nula, dado que K$<0$, ou seja:
+```{r}
+2*pt(K,(length(X[,"Esquema.Novo.(em.milhares)"])-1))
+```
+$70\%$
+### (b) O p-valor do teste de hipótese se testarmos uma diferença de $5000?
+```{r}
+A<-X[,"Esquema.Anterior.(em.milhares)"]
+A<- X[,"Esquema.Novo.(em.milhares)"]-A
+t.test(A,mu=5)
+```
+p-valor=$70\%$
+
+### (c) O Poder do Teste? Tente fazer os desenhos das distribuições envolvidas e mostrar a área que corresponde ao poder do teste.
+
+
+O poder do teste é $70%$, isto é, a probabilidade de rejeitar a hipótese nula sendo ela falsa.
+```{r}
+x<-seq(-6,6,length=1000)
+plot(x,dt(x,29),lwd=1)
+xl<-x[x<=qt(0.025,29)];yl<-dt(xl,29)
+x2<-c(-6,xl,xl[length(xl)],-6);y2<-c(0,yl,0,0)
+polygon(x2,y2,col='red')
+
+xl<-x[x>=qt(0.975,29)];yl<-dt(xl,29)
+x2<-c(xl[1],xl,xl[length(xl)],xl[1]);y2<-c(0,yl,0,0)
+polygon(x2,y2,col='red')
+```
+

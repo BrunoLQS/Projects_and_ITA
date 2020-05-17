@@ -1,0 +1,47 @@
+---
+title: "Bruno_T3_S15_QUIZ.Rmd"
+author: "Bruno Lima Queiroz Santos"
+date: "26/11/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+X<-rnorm(n<-1000,mean<-30,sd<-1)
+t.test(X,mu=22,alternative="two.sided")
+
+t.test(X,mu=30,alternative="two.sided")
+
+Z<-(mean(X)-30.0)*sqrt(length(X))/sd(X)
+Z
+pt(Z,999)
+pt(Z,999,lower.tail=F)
+(pt(Z,999)+pt(Z,999,lower.tail=F))/2
+
+```
+
+Percebe-se que o $p$-valor consiste no máximo número real $p$ tal que sua variável $t \in IC (1-p)\%$. Pela lógica do teste, de remoção das duas caudas, $p$-valor $=2*P(t>|t_{\alpha/2}|)$, ou seja, $p=P(|t|>|Z|)$, isto é, a probabilidade que $|t|$ esteja fora do intervalo $[0,|Z|]$ no gráfico de densidade de Student, em outras palavras, que $|t|$ esteja além de $|z|$. Se isso for menor que $5,0\%$, temos a rejeição da hipótese nula pelo nível de significância de $0,05$
+```{r}
+X<-rnorm(n<-16,mean<-30,sd<-10)
+qt(0.025,n-1,lower.tail=FALSE)
+round(qt(0.025,n-1),2)
+```
+
+## Questão 2
+
+```{r}
+round(qt(0.975,15)/sqrt(16),3)
+```
+
+## Questão 3
+```{r}
+(qnorm(0.975)/0.1)^2
+```
+
+## Questão 4
+```{r}
+
+```
