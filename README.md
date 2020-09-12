@@ -6,7 +6,7 @@ Repositório criado em 17/05/2020 hospedando trabalhos desenvolvidos no decorrer
 * CES-10 :
 * CES-11 :
 * EET-01 : Sinais e sistemas de tempo discreto, disciplina cursada na graduação do ITA.
-
+* R&Python : Projeto de integração do R com o Python por meio do baixo nível da biblioteca rpy2 no Python.
 
 
 
