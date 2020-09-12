@@ -1,7 +1,7 @@
 # Public_17_05_2020
 Repositório criado em 17/05/2020 hospedando trabalhos desenvolvidos no decorrer da graduação do ITA que são apresentáveis publicamente.
 
-
+* **Math_AND_Complex_Numbers** : Projeto para a operação de vetores 3D **complexos inclusive** a partir do Python.
 * **Z-Transform** : Projeto para a realização da transformada Z no Python.
 * **R&Python** : Projeto de integração do R com o Python por meio do mais baixo nível da biblioteca rpy2 no Python.
 * Disciplinas cursadas no **ITA** : 
