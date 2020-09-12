@@ -5,7 +5,7 @@ Repositório criado em 17/05/2020 hospedando trabalhos desenvolvidos no decorrer
 * CCI-22 : Matemática Computacional, disciplina cursada na graduação do ITA.
 * CES-10 :
 * CES-11 :
-
+* EET-01 : Sinais e sistemas de tempo discreto, disciplina cursada na graduação do ITA.
 
 
 
