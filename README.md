@@ -2,9 +2,9 @@
 Repositório criado em 17/05/2020 hospedando trabalhos desenvolvidos no decorrer da graduação do ITA que são apresentáveis publicamente.
 
 
-* *Z-Transform* : Projeto para a realização da transformada Z no Python.
-* *R&Python* : Projeto de integração do R com o Python por meio do baixo nível da biblioteca rpy2 no Python.
-* Disciplinas cursadas no *ITA* : 
+* **Z-Transform** : Projeto para a realização da transformada Z no Python.
+* **R&Python** : Projeto de integração do R com o Python por meio do baixo nível da biblioteca rpy2 no Python.
+* Disciplinas cursadas no **ITA** : 
  * CCI-22 : Matemática Computacional, disciplina cursada na graduação do ITA.
  * CES-10 : Introdução a Computação, disciplina cursada na graduação do ITA.
  * CES-11 : Algoritmos e Estruturas de Dados, disciplina cursada na graduação do ITA.
