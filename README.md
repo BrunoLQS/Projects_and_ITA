@@ -4,6 +4,7 @@ Repositório criado em 17/05/2020 hospedando trabalhos desenvolvidos no decorrer
 * **Math_AND_Complex_Numbers** : Projeto para a operação de vetores 3D **complexos inclusive** a partir do Python.
 * **Z-Transform** : Projeto para a realização da transformada Z no Python.
 * **R&Python** : Projeto de integração do R com o Python por meio do mais baixo nível da biblioteca rpy2 no Python.
+* **Template** : Template para a Carta de Smith por meio do Inkscape incluso o arquivo de unidades modificado.
 * Disciplinas cursadas no **ITA** : 
   * CCI-22 : Matemática Computacional, disciplina cursada na graduação do ITA.
   * CES-10 : Introdução a Computação, disciplina cursada na graduação do ITA.
